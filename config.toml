@@ -1,0 +1,5 @@
+baseURL = "localhost"
+languageCode = "en-us"
+title = "zpcknu - a newbie morty's blog"
+theme = "zpcknu"
+MetaDataFormat = "toml"
