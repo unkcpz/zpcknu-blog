@@ -1,8 +1,8 @@
 +++
 title =  "Lorem Ipsum"
 Description = ""
-Tags = []
-Categories = []
+Tags = ["go", "math", "physics"]
+Categories = ["algorithm", "golang"]
 date = 2017-03-03T14:15:59-06:00
 draft =  true
 +++

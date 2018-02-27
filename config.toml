@@ -3,7 +3,30 @@ languageCode = "en-us"
 title = "zpcknu - a newbie morty's blog"
 theme = "zpcknu"
 MetaDataFormat = "toml"
+preserveTaxonomyNames = true
+footnotereturnlinkcontents = "↩"
 
 [permalinks]
-  page = "/:title/"
-  about = "/:filename/"
+    post = "/post/:year/:month/:day/:slug/"
+    note = "/note/:year/:month/:day/:slug/"
+    about = "/:filename/"
+
+[[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 2
+[[menu.main]]
+    name = "Categories"
+    url = "/categories/"
+    weight = 3
+[[menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 4
+[params]
+description = "A website built through Hugo and blogdown."
+footer = "&copy; [Jason Yu](http://) 2017 -- 2018 | [Github](https://github.com/unkcpz) | [Twitter]"
