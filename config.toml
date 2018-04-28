@@ -5,6 +5,8 @@ theme = "zpcknu"
 MetaDataFormat = "toml"
 preserveTaxonomyNames = true
 footnotereturnlinkcontents = "↩"
+PygmentsCodeFences = true
+PygmentsStyle = "tango"
 
 [permalinks]
     post = "/post/:year/:month/:day/:slug/"
