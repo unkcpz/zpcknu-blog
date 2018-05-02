@@ -6,6 +6,9 @@ Categories = []
 date = 2018-03-10T12:04:29+08:00
 +++
 
+内容为Robert C.Martin 经典作品 *Agile Software Development* 中
+有关简单重构案例的`golang`
+
 ## version1
 
 首先确定所要构造的函数，和函数的类型。
