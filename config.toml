@@ -1,4 +1,4 @@
-baseURL = "localhost"
+baseURL = ""
 languageCode = "en-us"
 title = "zpcknu - a newbie morty's blog"
 theme = "zpcknu"
