@@ -205,6 +205,29 @@ Memory Device
 - 新版CentOS7.5使用xfs文件系统，而旧的Rocks6.1.1使用ext4文件系统，数据拷贝还是直接转移硬盘？
 - 是否有必要做RAID？？
 
+分区信息:
+```text
+[jsy@wz-hpc jsy]$ lsblk
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda      8:0    0 223.1G  0 disk
+|-sda1   8:1    0  97.7G  0 part /
+|-sda2   8:2    0  19.5G  0 part /var
+|-sda3   8:3    0   9.8G  0 part [SWAP]
+|-sda4   8:4    0     1K  0 part
+`-sda5   8:5    0  96.1G  0 part /state/partition1
+sdb      8:16   0   9.1T  0 disk
+`-sdb1   8:17   0   9.1T  0 part /public
+sr0     11:0    1  1024M  0 rom  
+[jsy@wz-hpc jsy]$ df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/sda1              97G   19G   73G  21% /
+tmpfs                  64G   84K   64G   1% /dev/shm
+/dev/sda5              95G   79G   12G  88% /state/partition1
+/dev/sda2              20G  2.6G   16G  15% /var
+/dev/sdb1             9.0T  3.7T  4.9T  44% /public
+tmpfs                  31G   79M   31G   1% /var/lib/ganglia/rrds
+```
+
 任务运行和数据备份问题：
 
 - 改建期间，所有在运行的任务需要停止。改建会在暑假较少人使用时进行，改建时间预定为7天。
