@@ -28,13 +28,13 @@ slurm脚本模板为`matlab_job.sh`：
 
 module load matlab/R2016b
 
-matlab -nodisplay -nosplash -nojvm -singleCompThread -r script.m
+matlab -nodisplay -nosplash -nojvm -singleCompThread -r script
 ```
 其中前三个参数`-nodisplay`, `-nosplash`, `-nojvm`保证了在命令行中而不是用图形界面执行matlab。
 `-singleCompThread`参数为程序中有并行代码时使用，确保了每个核不会多线程运行。由于matlab的
 多维度编程的性能提升很大，在大的矩阵操作时可将此参数关闭，来实现多线程。
 
-参数`-r`后面紧跟所要运行的`.m`文件。
+参数`-r`后面紧跟所要运行的`.m`文件的文件名<span style="color:red">！！！注意不要写后缀，否则会出错！！！</span>。
 
 将脚本与要执行的`.m`文件放在相同文件夹下，运行`sbatch ./matlab_job.sh`即可。
 
