@@ -15,7 +15,8 @@ date = 2018-05-18
   2. 资源按组分配，保证了每个用户的需求，增加了资源的使用率，减少了排队的等待时间。
   3. 若按照该计划实行，则组内几乎所有人的任务都能在组内所有的资源下进行，可减少超算的使用，节约了
   成本。
-  4. 此时，超算的使用可将yjzhao和xbyang共10个用户分别分给指定使用者，方便统计使用率和投入产出比。
+  4. 此时，超算的使用可将yjzhao和xbyang共10个用户分别分给指定使用者（一人一号），在确定计算方案后进行大项目的运算
+  ，且方便统计使用率和投入产出比。
   5. 超算上配置因为用户的独立可以对当前使用的用户有最大的可调整和伸缩性。不会因为`~/.bashrc`的设置，
   造成原先可能出现的修改后其他软件无法正常使用的情况。
   6. matlab和python等长时间的计算任务通过与其他计算任务一样的方式管理，减少了用户对同一台机器使用
@@ -94,18 +95,19 @@ date = 2018-05-18
 
 #### 根据需求的节点分组方案
 
-1. 2个五舟节点分组`-p bigram`作为大内存节点，用于SOC和大内存需求的计算。WALLTIME=1month
-2. 2个五舟节点分组`-p single`作为matlab和python等小型长时间独立任务节点，最高每人每次10个核
+1. 2个五舟节点分组`-p bigram`作为大内存节点，用于HSE+SOC和大内存需求的计算。WALLTIME=1month
+2. 1个五舟节点分组`-p single`作为matlab和python等小型长时间独立任务节点，最高每人每次10个核
 ，WALLTIME=1month
-3. 剩余六个五舟节点分组为`-p big`作为多核、长时间、少数量任务，大体系和精细性质的计算。最高每人每次40个核
+3. 剩余7个五舟节点分组为`-p big`作为多核、长时间、少数量任务，大体系和精细性质的计算。最高每人每次40个核
 ，WALLTIME=2Weeks
-4. 十个Dell R610分组为`-p small`作为少核、短时间、大数量任务，小体系（少于100个电子）和高通亮，或全局搜
-索。最高每人每次40个核，WALLTIME=3days
-5. 20个Dell-R620分组为`-p jp`，该项目主要供本科生使用。
-6. 2个Dell-R620分组为`-p smallplus`同样作为少核、超短时间、大数量任务，小体系和高通亮，或全局搜索。最高每
-人每次4个核，WALLTIME=12hours
-7. ？？？PWMAT机器如果接入统一管理，则用于超大体系（>100原子，K-mesh=4x4x4, 每电子布800s以上，或GW和精细光
-学性质等）的长时间运算。速度可为普通cpu的10倍以上。
+4. 18个Dell R620分组为`-p small`作为少核、短时间、大数量任务，小体系（少于100个电子）和高通亮，或全局
+搜索。最高每人每次36个核，WALLTIME=1days
+5. 4个Dell R620分组为`-p sfast`作为少核、短时间、大数量任务，小体系（少于100个电子）和高通亮，或全局
+搜索。最高每人每次4个核，WALLTIME=12hours
+6. 10个Dell-R610分组为`-p jp`，该项目主要供本科生使用。
+人每次4个核，WALLTIME=7days
+7. ？？？PWMAT机器如果接入统一管理，则用于超大体系（>100原子，K-mesh=4x4x4, 每电子布800s以上，或GW和
+精细光学性质等）的长时间运算。速度可为普通cpu的10倍以上。
 
 ### 软件信息
 
@@ -140,11 +142,58 @@ date = 2018-05-18
 
 ### 改建成本
 
-1. 一个独立储存阵列盒
-2. 加大五舟两个节点作为大内存所需的内存条，估计增加大256G或512G（根据实际使用需求扩展）
-2. 修复存在问题的五舟机器
-3. 更换原有16中Dell-R610中一台机器的损坏内存
-4. ？？DellR620使用的快速交换网络？
+- 一个独立储存阵列盒
+- 修复存在问题的五舟机器
+- DellR620使用的快速交换网络
+- 更换原有16中Dell-R610中一台机器的损坏内存, 型号如下：
+
+```text
+Handle 0x110B, DMI type 17, 28 bytes
+Memory Device
+       Array Handle: 0x1000
+       Error Information Handle: Not Provided
+       Total Width: 72 bits
+       Data Width: 64 bits
+       Size: 4096 MB
+       Form Factor: DIMM
+       Set: 6
+       Locator: DIMM_B3
+       Bank Locator: Not Specified
+       Type: DDR3
+       Type Detail: Synchronous Registered (Buffered)
+       Speed: 1333 MHz
+       Manufacturer: 00AD00B380AD
+       Serial Number: 03691E86
+       Asset Tag: 01114461
+       Part Number: HMT351R7BFR8A-H9  
+       Rank: 2
+```
+- 加大五舟两个节点作为大内存所需的内存条，增加到256G，型号如下：
+
+```text
+Handle 0x0030, DMI type 17, 34 bytes
+Memory Device
+        Array Handle: 0x0026
+        Error Information Handle: Not Provided
+        Total Width: 72 bits
+        Data Width: 64 bits
+        Size: 16384 MB
+        Form Factor: DIMM
+        Set: None
+        Locator: P2_DIMMG1
+        Bank Locator: Node1_Bank0
+        Type: DDR3
+        Type Detail: Registered (Buffered)
+        Speed: 1333 MHz
+        Manufacturer: Samsung           
+        Serial Number: 97EF4A3D    
+        Asset Tag: Dimm6_AssetTag
+        Part Number: M393B2G70QH0-
+        Rank: 1
+        Configured Clock Speed: 1333 MHz
+
+```
+
 
 ### 困难
 储存问题：
@@ -163,4 +212,6 @@ A：
 
 `$$\Delta \chi \Delta \rho \geq \frac{\hbar}{2}$$`
 
-- 根据使用需求，是否dell-R620 `-p jp`分组的机器有必要使用快速交换网络，达到节点间的合理快速并行？
+- 根据使用需求，是否dell-R620 `-p small`分组的机器有必要使用快速交换网络，达到节点间的合理快速并行？
+
+A： 有必要。有跨节点的需求。
