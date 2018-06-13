@@ -8,7 +8,7 @@ title =  "Home"
 
 > Wubba lubba dub dub.
 >
-> --- Rick
+> --- Rick Sanchez
 
 
 `$${\sqrt {n}}\left(\left({\frac {1}{n}}\sum _{i=1}^{n}X_{i}\right)-\mu \right)\ {\xrightarrow {d}}\ N\left(0,\sigma ^{2}\right)$$`
