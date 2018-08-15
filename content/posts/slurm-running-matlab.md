@@ -9,7 +9,9 @@ lastmod = 2018-05-21
 
 ## 以任务的方式提交matlab任务(recommoned)
 
-<span style="color:red">切记在要运行的 `.m` 文件的结尾加入 `quit`， 否则在任务结束后无法释放节点。</span>
+- <span style="color:red">切记在要运行的 `.m` 文件的结尾加入 `quit`， 否则在任务结束后无法释放节点。</span>
+
+- <span style="color:red">切记提交的任务在要使用***并行***（parfor），否则会出现不满核占据单节点的情况，造成资源的浪费。并行详情咨询长春。</span>
 
 slurm脚本模板为`matlab_job.sh`：
 ```sh
