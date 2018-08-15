@@ -31,6 +31,27 @@ cmp集群提供给新生和有折腾意愿的同学和老师使用。将来会�
 - jpmid: 为景派提供的四子星机器，每节点24物理核，64G内存。在用节点4个。cn[99101-99104]
 - small: 为DELL r610机器，每节点12物理核，32G内存。在用节点9个。cn[97101-97109]
 
+## 用户`~/.bashrc`配置
+为使得VASP进行计算时能够处理打文件读写，用户将自己的文件句柄加大到`unlimited`，
+增加`ulimit -s unlimited`，
+修改后的`~/.bashrc`为：
+```bash
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:                                                                            
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+ulimit -s unlimited
+```
+
+且除了自己的脚本和独特的软件，
+<span style="color:red">***切勿修改***`~/.bashrc`</span>
 
 ## 任务管理系统`SLURM`使用
 
