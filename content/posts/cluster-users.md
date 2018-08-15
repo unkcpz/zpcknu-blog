@@ -1,97 +1,85 @@
 +++
-title = "308集群：用户手册"
+title = "cmp集群：用户手册"
 Description = ""
 Tags = ["cluster", "system"]
 Categories = ["manual"]
 date = 2018-04-28
+lastmod = 2018-08-13
 +++
 
-## 集群描述
+## 集群名称和描述
+现有两组集群，分别是：
+  1. 原先的五舟机器，采用SGE任务管理，安装Rocks6.1.1操作系统。
+  2. 新建的集群，采用SLURM任务管理，安装CentOS 7.5操作系统，使用openhpc仓库的`WareWulf`集群管理软件。
 
-### 集群名称
-- 原先16的10个节点全部接入原先的28统一管理，所以不再以16和28称呼，集群名称现在
-为''2816''或者叫做''集群''
-- 现有的用作matlab和python单独计算的机器就叫暂时称作"matlab服务器"
-- `pwmat`计算机器称作''pwmat''
-- 原先的16登陆节点还存放有一些数据和vasp赝势，称作''16储存''
+五舟的集群依照惯例称为<span style="color:red">'28'</span>，
+实际的IP为`202.38.220.11:22`。
+新建的集群称为<span style="color:red">'cmp集群'</span>，IP为`202.38.220.11:22`。
 
-### 集群IP
-```
-2816:
-    IP = 202.38.220.11, Port = 22
+### 用户的分类
+28保持原有全部设置，数据也不进行迁移，主要提供给即将毕业的同学使用，保证他们的正常使用，无需重新
+适应新的集群。且该集群速度较快，支持IB网络，适用于大体系的计算和跨节点并行。
 
-matlab服务器:
-    IP = 202.38.220.11, Port = 7001
+cmp集群提供给新生和有折腾意愿的同学和老师使用。将来会将所有新加入节点都接入该集群统一管理，
+统一使用相同的任务管理和集群管理软件，方便用户的学习和管理员的交接。该节点单核性能较差，但核数
+较多。缺点在于由于缺少IB网络的支持，跨节点并行的性能上不能达到倍数的增长。
 
-16储存:
-    IP = 202.38.220.11, Port = 7002
+### cmp集群分区信息
+可以使用`sinfo`查询当前分组，当前有三个分组，分别对应三类机器。
 
-pwmat:
-    IP = 202.38.220.14, Port = 22
-```
+- dellmid: 为DELL r620机器，每节点12个物理核，64G内存。在用节点12个。cn[98101-98112]
+- jpmid: 为景派提供的四子星机器，每节点24物理核，64G内存。在用节点4个。cn[99101-99104]
+- small: 为DELL r610机器，每节点12物理核，32G内存。在用节点9个。cn[97101-97109]
 
-### 集群信息和性能
-* 2816
-  * compute-0-0到compute-0-8共9个节点每个节点:20cores，cpu参数：Intel(R) Xeon(R) CPU E5-2680 v2 @ 2.80GHz，内存128G
-  * compute-0-9到compute-0-19共10个节点每个节点:12cores，cpu参数： Intel(R) Xeon(R) CPU E5645  @ 2.40GHz，内存32G
-* matlab服务器
-  * 一个计算节点:20cores, cpu参数：Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz
-* pwmat
-  * 4×GPU，单GPU参数：
-  * 16×cpu，单cpu参数：
 
-## 任务管理系统`SGE`使用
+## 任务管理系统`SLURM`使用
 
-### `SGE`现有环境描述
-
-现在共有三种队列
-
-1. `big.q`： 使用的节点为compute-0-0到compute-0-7，内存大，cpu性能好，为对速度需求高且有大
-    内存需求的计算任务使用
-2. `med.q`： 使用的节点为compute-1-0到compute-1-5，性能一般，允许跨节点并行，性能稳定，为长时间计算的任务准备。
-3. `small.q`：使用的节点为compute-2-0到compute-2-3，性能一般，小型体系和短时间任务所用，不可使用多余单个节点的核数。
-4. `big_split.q`：使用节点为compute-3-0，cpu性能好，为小体系需要快速完成的任务准备（如高通量和搜索软件），
-    该队列不可以设置核数大于4的单个任务。
-
-### `qsub`使用和参数
-* `-pe <arg1> <arg2>`： parellel environment
-  * <arg1> 第一个参数为所使用的并行环境，统一后2816机器只有一个环境为`mpi`。
-  * <arg2> 第二个参数为计算所使用的核数，根据用户需求指定。
-* `-q <arg>`： 指定队列
-  * <arg> 该参数指定所用的计算队列。
-
-### `SGE`脚本模板
+### `SLURM`脚本提交模板
 ```bash
-#!/bin/bash     
-#$ -S /bin/sh
-#$ -cwd            
-#$ -V            
-#$ -N out
-#$ -pe mpi 12
-#$ -q med.q
-#$ -j y
+#!/bin/bash -l
+# NOTE the -l flag!
+#
+#SBATCH -J NAME
+# Default in slurm
+# Request 5 hours run time
+#SBATCH -t 5:0:0
+#
+#SBATCH -p small -N 1 -n 12
+# NOTE Each small node has 12 cores
+#
 
-module load vasp/5.4.4-impi-mkl15
+module load vasp/5.4.4-impi-mkl
 
-mpirun -n ${NSLOTS} vasp_std
+# add your job logical here!!!
+mpirun -n 12 vasp_std
 ```
-脚本同正常脚本所用的`sh`为第二行所用的`sh`
-在工作目录中写入该文件，保存名称如`job.sh`,在命令行中运行以下命令即可提交认为到节点。
-<span style="color:red">*请根据任务的需求认真确定和选择`-pe`和`-q`两个参数!!!*</span>
+在工作目录中写入该文件，保存名称如`job.sh`,在命令行中运行以下命令即可提交任务到节点。
+其中的所有`#SBATCH`后面的参数均可以在命令行中分开指定。
+<span style="color:red">*请根据任务的需求认真确定和选择`-p`和`-n`两个参数!!!*</span>
+<span style="color:red">*请根据任务的需求认真确定和选择准确评估任务上限时间!!!*</span>
 
 ```sh
-$ qsub job.sh
+$ sbatch job.sh
 ```
 
 <span style="color:red">*若要提交任务到指定节点，或交互式运行任务，请参考管理员手册，或直接咨询管理员。*</span>
 
-### `qrsh`使用
-
-参数基本同`qsub`
-
-功能为申请指定节点。
+### (OPTIONAL) 超算任务提交
+超算同样使用`SLURM`作为任务管理系统。
 
 ## `module`软件模块挂载
+所有的软件为了保证编译和使用环境互不冲突，使用`module`作为模块管理软件。
 
+### 常用命令
 
-## 并行环境（`mpi`）描述
+```bash
+查找可用模块
+$ module avile
+
+显示已加载模块
+$ module list
+
+装载卸载模块
+$ module load vasp/5.4.4-impi-mkl
+$ module unload vasp/5.4.4-impi-mkl
+```
