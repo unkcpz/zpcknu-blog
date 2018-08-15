@@ -34,6 +34,15 @@ cmp集群提供给新生和有折腾意愿的同学和老师使用。将来会�
 
 ## 任务管理系统`SLURM`使用
 
+可参考:
+
+1. [Yale HPC](https://research.computing.yale.edu/support/hpc/user-guide/slurm)
+2. [USC SLURM](https://hpcc.usc.edu/support/documentation/slurm/)
+
+从`SGE`转移过来的用户可以参考:
+
+1. [UPPMAX SGE vs SLURM](https://www.uppmax.uu.se/support/user-guides/sge-vs-slurm-comparison/)
+
 ### `SLURM`脚本提交模板
 ```bash
 #!/bin/bash -l
