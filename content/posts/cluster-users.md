@@ -3,8 +3,8 @@ title = "cmp集群：用户手册"
 Description = ""
 Tags = ["cluster", "system"]
 Categories = ["manual"]
-date = 2018-04-28
-lastmod = 2018-08-13
+date = 2018-08-13
+lastmod = 2018-08-15
 +++
 
 ## 集群名称和描述
