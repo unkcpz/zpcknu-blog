@@ -31,4 +31,4 @@ PygmentsStyle = "tango"
     weight = 4
 [params]
 description = "A website built through Hugo and blogdown."
-footer = "&copy; [Jason Yu](http://) 2017 -- 2018 | [Github](https://github.com/unkcpz) | [Twitter]"
+footer = "&copy; [Jason Yu](http://morty.tech/about/) 2017 -- 2018 | [Github](https://github.com/unkcpz) | [Twitter]"
