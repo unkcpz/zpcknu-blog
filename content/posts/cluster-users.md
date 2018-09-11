@@ -113,3 +113,5 @@ $ module list
 $ module load vasp/5.4.4-impi-mkl
 $ module unload vasp/5.4.4-impi-mkl
 ```
+
+装载环境后，则 ``$PATH`` 包含vasp执行路径，同时，赝势文件的路径为 ``$PPS_PATH`` 。
