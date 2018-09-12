@@ -93,3 +93,15 @@ $ docker run --rm --user 1000:1000 \
 ```bash
 $ psql -h localhost -p 5432 -d aiidadb -U aiida
 ```
+
+## 备份和重载数据库
+
+Backup:
+```bash
+$ docker exec -t -u postgres aiida-postgres pg_dumpall -c > /data/db_backup/dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
+```
+
+Restore:
+```bashrc
+cat <your_dump>.sql | docker exec -i aiida-postgres psql -U postgres
+```
