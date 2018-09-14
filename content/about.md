@@ -12,4 +12,4 @@ date = "2018-02-26"
 
 2017-now  华南理工大学  学徒
 
-A Linux User. An Archer. A Gopher. A Pythoner. A Learner.
+A Uxorious Husband. A Linux User. An Archer. A Gopher. A Pythoner. A Learner.
