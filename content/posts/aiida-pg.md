@@ -75,6 +75,26 @@ The files belonging to this database system will be owned by user "postgres".
 ( once it\'s finished initializing successfully and is waiting for connections, stop it )
 ```
 
+新建volume后，会将创建的卷挂在到`/var/lib/docker/volumes/`中，可使用一下命令查看新建volume的
+信息。
+```bash
+$ docker volume inspect <volume-name>
+```
+输出:
+```json
+[
+    {
+        "CreatedAt": "2018-09-19T11:04:58+08:00",
+        "Driver": "local",
+        "Labels": {},
+        "Mountpoint": "/var/lib/docker/volumes/aiida-dev-db/_data",          
+        "Name": "aiida-dev-db",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+```
+
 ### 改变镜像中`/var/lib/postgresql/data`的所有权
 这样就能用特定用户`--user`参数来运行镜像，但是使用的在使用用户`1000`也就是`$(id -u)`不在/etc/passwd中，
 所以需要改变所有权：
