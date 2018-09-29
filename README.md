@@ -1,1 +1,2 @@
 # zpcknu-blog
+HUGO
