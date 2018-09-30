@@ -1,0 +1,3 @@
+[submodule "themes/zpcknu-theme"]
+	path = themes/zpcknu-theme
+	url = git@github.com:unkcpz/zpcknu-theme.git
