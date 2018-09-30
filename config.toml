@@ -1,7 +1,7 @@
 baseURL = ""
 languageCode = "en-us"
 title = "zpcknu - a newbie morty's blog"
-theme = "zpcknu"
+theme = "zpcknu-theme"
 MetaDataFormat = "toml"
 preserveTaxonomyNames = true
 footnotereturnlinkcontents = "↩"
