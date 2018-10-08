@@ -12,6 +12,9 @@ date = 2018-09-30
 方法相似。即便这种近似方法忽略了电子-电子相互作用，它还是能够达到特定精度的结果，并且可作为其他
 更为精确方法的出发点。
 
+紧束缚的“紧”描述的是体系中的电子是和该电子所在的原子紧紧束缚在一起的。因此，该电子与相邻原子只有
+有限的作用。
+
 原胞中的波函数 `$\psi_{ucell}(\mathbf{r})$` 可以认为由晶胞中所有原子价轨道线性组合而成:
 
 `$$\psi_{ucell}(\mathbf{r})=\displaystyle\sum_{a} \sum_{ao}c_{ao,a}\phi_{ao}^{Z_a}(\mathbf{r}-\mathbf{r_a})$$`
@@ -28,7 +31,8 @@ date = 2018-09-30
 
 `$$\psi_{\mathbf{k}}(\mathbf{r})=\frac{1}{\sqrt{N}}\displaystyle\sum_{h,j,l} e^{i(h\mathbf{k}\cdot \mathbf{a_1} + j\mathbf{k}\cdot \mathbf{a_2} + l\mathbf{k}\cdot \mathbf{a_3})} \psi_{ucell} (\mathbf{r}-h\mathbf{a_1}-j\mathbf{a_2}-l\mathbf{a_3})$$`
 
-其中 `$N$` 为实际晶体中原胞的数量（因为不可能取无限大的胞来表示周期性晶体）；`$h,j,\mathrm{and}, l$` 用于表示晶体
+其中 `$N$` 为实际晶体中原胞的数量（因为全空间为无限大的胞来表示周期性晶体，在全空间积分后则其被积分掉）
+；`$h,j,\mathrm{and}, l$` 用于表示晶体
 中的特定原胞；`$\mathbf{k}$` 为波矢；`$\mathbf{a_1}, \mathbf{a_2}, \mathrm{and}, \mathbf{a_3}$` 为
 实空间中原胞的基矢。晶体在空间中有平移对称性，因此平移算符和能量算符是对易的:
 
@@ -36,7 +40,43 @@ date = 2018-09-30
 
 ### 一维单原子晶体
 
+考察拥有一个价层轨道 `$\phi$` 构成的一维晶体。体系紧束缚的波函数可以写为：
+
+`$$\psi_{\mathbf{k}}(x)=\frac{1}{\sqrt{N}}\displaystyle\sum_{n}e^{inka}\phi (x-na)$$`
+
+此处，`$n$` 为整数。将上述波函数带入Schrödinger方程，左右两边乘以 `$\phi^{*}(x)$` 在全空间积分得：
+
+`$$\langle \phi(x) | \hat{H} | \psi_{\mathbf{k}}(x) \rangle= E \langle \phi(x) | \psi_{\mathbf{k}}(x) \rangle$$`
+
+在紧束缚近似中，只有on-site 和最近邻矩阵元在等号左边保留，只有on-site项在右边保留。其余项忽略，因此有：
+
+`$$\langle\phi\left(x\right)|\hat{H}|\phi\left(x-a\right)\rangle e^{-ika} +\langle\phi\left(x\right)|\hat{H}|\phi\left(x\right)\rangle+\langle\phi\left(x\right)|\hat{H}|\phi\left(x+a\right)\rangle e^{ika} + \text{small terms}= E + \text{small terms} .$$`
+
+令 `$\epsilon = \langle\phi\left(x\right)|\hat{H}|\phi\left(x\right)\rangle$` 且 `$t = - \langle\phi\left(x\right)|\hat{H}|\phi\left(x-a\right)\rangle$`
+色散关系可表示为
+
+`$$ E= \epsilon -t\left(e^{-ika} + e^{-ika}\right).
+$$`
+
+也就是
+
+`$$ E= \epsilon -2t\cos\left(ka\right) .
+$$`
+
+如图：
+
 ### 一维双原子晶体
+
+考察在一个一维晶胞中有两个原子体系。体系的波函数可以写为：
+
+`$$ \psi_{k}\left(x\right)=\frac{1}{\sqrt{N}}\sum\limits_{n}e^{inka} \left( c_1\phi_1\left(x-na\right) +c_2\phi_2\left(x-na\right)\right) .
+$$`
+
+仿照一维单原子的处理方法，在Schrödinger方程的两边分别乘上原子波函数并在全空间积分：
+`$$ \begin{array}{a}
+\langle\phi_1|\hat{H}|\psi_{k}\rangle = E\langle\phi_1|\psi_{k}\rangle , \\ \langle\phi_2|\hat{H}|\psi_{k}\rangle = E\langle\phi_2|\psi_{k}\rangle . \end{array}
+$$`
+
 
 ### 石墨烯 (Graphene)
 
