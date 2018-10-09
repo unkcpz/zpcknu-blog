@@ -1,6 +1,6 @@
 +++
-title = "Tight binding 紧束缚模型"
-Description = "紧束缚模型 （Tight binding） 模型的介绍"
+title = "Tight binding 紧束缚模型及其实例"
+Description = "紧束缚模型 （Tight binding） 模型的介绍，伴有几种特殊体系的紧束缚模型的解"
 Tags = ["model", "physics", "tight-binding"]
 Categories = ["intro"]
 date = 2018-09-30
@@ -63,7 +63,9 @@ $$`
 `$$ E= \epsilon -2t\cos\left(ka\right) .
 $$`
 
-如图：
+如下图(`$\epsilon=2, t=1, a=1$`)：
+
+![](/images/tb-1D-01.png)
 
 ### 一维双原子晶体
 
@@ -76,6 +78,15 @@ $$`
 `$$ \begin{array}{a}
 \langle\phi_1|\hat{H}|\psi_{k}\rangle = E\langle\phi_1|\psi_{k}\rangle , \\ \langle\phi_2|\hat{H}|\psi_{k}\rangle = E\langle\phi_2|\psi_{k}\rangle . \end{array}
 $$`
+
+依旧只考虑on-site和最近邻作用，忽略其余项，可得：
+
+`$$ \begin{array}{a}
+\epsilon_1 c_1 -tc_2(1+e^{-ika}) = Ec_1 ,\\
+\epsilon_2 c_2 -tc_1(1+e^{ika}) = Ec_2.
+\end{array} $$`
+
+其中，
 
 
 ### 石墨烯 (Graphene)
