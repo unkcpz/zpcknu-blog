@@ -36,9 +36,25 @@ date = 2018-09-30
 中的特定原胞；`$\mathbf{k}$` 为波矢；`$\mathbf{a_1}, \mathbf{a_2}, \mathrm{and}, \mathbf{a_3}$` 为
 实空间中原胞的基矢。晶体在空间中有平移对称性，因此平移算符和能量算符是对易的:
 
-`$$\hat{T}_{pqs}\psi_{\mathbf{k}}(\mathbf{r})=\psi_\mathbf{k}$$`
+`$$ \hat{T}_{pqs}\psi_{\vec{k}}\left(\vec{r}\right)=\psi_{\vec{k}}\left(\vec{r}+p\vec{a}_1+q\vec{a}_2+s\vec{a}_3\right)=e^{i\left(p\vec{k}\cdot\vec{a}_1 + q\vec{k}\cdot\vec{a}_2 + s\vec{k}\cdot\vec{a}_3\right)}\psi_{\vec{k}}\left(\vec{r}\right).
+$$`
 
-### 一维单原子晶体
+紧束缚模型的波函数`$\psi_{\vec{k}}$`可代入不含时的Schrödinger求解能量和波矢的色散关系：
+`$$ \hat{H}\psi_{\vec{k}}=E\psi_{\vec{k}} .
+$$`
+
+通过分别在左边乘上每个原子轨道的波函数`$\phi_{n}^*\left(\vec{r}\right)$`，可以构成方程组：
+`$$ \langle\phi_{n}|\hat{H}|\psi_{\vec{k}}\rangle = E\langle\phi_{n}|\psi_{\vec{k}}\rangle.
+$$`
+其中的`$n$`为轨道的数量。
+
+由于随着电子间距离的增大，轨道的交叠迅速减小。因此，可以简单的在模型中认为只有on-site项(`$\langle\phi_n|\hat{H}|\phi_n\rangle$`)和最近邻项重要。故等式的左右两边可以化简为只有相应高阶项：
+`$$ c_n\langle\phi_{n}|\hat{H}|\phi_{n}\rangle + \sum\limits_{m=\text{nearest neighbors}}c_m\langle\phi_{n}|\hat{H}|\phi_{m}\rangle e^{i\left(h\vec{k}\cdot\vec{a}_1 + j\vec{k}\cdot\vec{a}_2 + l\vec{k}\cdot\vec{a}_3\right)} + \text{small terms} = Ec_n\langle\phi_{n}|\phi_{n}\rangle + \text{small terms} .
+$$`
+
+对每一个原子轨道做如上操作，组成方程组，求解可得体系的能带。
+
+### 1-D 一维单原子晶体
 
 考察拥有一个价层轨道 `$\phi$` 构成的一维晶体。体系紧束缚的波函数可以写为：
 
@@ -67,7 +83,7 @@ $$`
 
 ![](/images/tb-1D-01.png)
 
-### 一维双原子晶体
+### 1-D 一维双原子晶体
 
 考察在一个一维晶胞中有两个原子体系。体系的波函数可以写为：
 
@@ -86,9 +102,36 @@ $$`
 \epsilon_2 c_2 -tc_1(1+e^{ika}) = Ec_2.
 \end{array} $$`
 
-其中，
+其中，`$\epsilon_1 = \langle\phi_1(x)|\hat{H}|\phi_1(x)\rangle$`,`$\epsilon_2 = \langle\phi_2(x)|\hat{H}|\phi_2(x)\rangle$`，且`$t = - \langle\phi_1(x)|\hat{H}|\phi_2(x)\rangle= - \langle\phi_2(x-a)|\hat{H}|\phi_1(x)\rangle$`。需要注意，在此处的`$t$`相同的是因为假设该双原子分子的两个原子
+相同，若不同则`$t_1 \neq t_2$`。上面的方程组可以写为矩阵的形式：
+`$$ \begin{bmatrix}
+\epsilon_1 -E & -t\left(1+e^{-ika}\right) \\
+ -t\left(1+e^{ika}\right) & \epsilon_2 -E\end{bmatrix}\left[ \begin{array}{c} c_1 \\ c_2 \end{array} \right] =0.$$`
+ 行列式为零时有解，也就是:
+ `$$ E^2-(\epsilon_1+\epsilon_2)E + \epsilon_1\epsilon_2 -2t^2(1+\cos(ka))=0.
+$$`
+可以解得色散关系为：
+`$$ E=\frac{(\epsilon_1+\epsilon_2)\pm \sqrt{(\epsilon_1-\epsilon_2)^2+8t^2(1+\cos(ka))}}{2}.
+$$`
+如下图：
 
 
-### 石墨烯 (Graphene)
 
-### 锂 (bcc) 晶体
+### 2-D 石墨烯 (Graphene)
+Graphene为二维六角晶格，其中原胞包含两个Carbon原子`$C_1$`和`$C_2$`，位于不等价的Wickoff位点。
+在Graphene中，`$p_x,p_y$`轨道参与平面方向`$sp^2$`杂化，`$p_z$`轨道为价轨道。
+两个原子的`$p_z$`轨道分别为`$\phi_{2p_{z1}}$`和`$\phi_{2p_{z2}}$`。
+
+原胞的基矢为：
+`$$ \begin{array}{a}
+\vec{a}_1 = \frac{\sqrt{3}a}{2} \hat{x}+ \frac{a}{2}\hat{y}, \\
+\vec{a}_2 = \frac{\sqrt{3}a}{2} \hat{x}- \frac{a}{2}\hat{y}. \end{array}$$`
+
+因此，graphene紧束缚模型的波函数可以写为：
+`$$ \psi_{\vec{k}}\left(\vec{r}\right)=\frac{1}{\sqrt{N}}\sum\limits_{h,j}e^{i\left(h\vec{k}\cdot\vec{a}_1 + j\vec{k}\cdot\vec{a}_2\right)} \left( c_1\phi_{\text{2p}_{z1}}\left(\vec{r}-h\vec{a}_1-j\vec{a}_2\right) + c_2 \phi_{\text{2p}_{z2}}\left(\vec{r}-h\vec{a}_1-j\vec{a}_2\right) \right) .
+$$`
+
+#### h-BN (optional)
+可参照graphene的模型来给出h-BN的紧束缚解。
+
+### 3-D 锂 (bcc) 晶体
