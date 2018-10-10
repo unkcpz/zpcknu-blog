@@ -10,9 +10,9 @@ title =  "Home"
 >
 > --- Rick Sanchez
 
-> 年轻人，用Arch吧！
+> I use Arch, btw.
 >
-> --- Felix Yan
+> --- Archlinux Meme
 
 
 `$${\sqrt {n}}\left(\left({\frac {1}{n}}\sum _{i=1}^{n}X_{i}\right)-\mu \right)\ {\xrightarrow {d}}\ N\left(0,\sigma ^{2}\right)$$`
