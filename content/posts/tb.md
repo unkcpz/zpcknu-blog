@@ -131,7 +131,85 @@ Graphene为二维六角晶格，其中原胞包含两个Carbon原子`$C_1$`和`$
 `$$ \psi_{\vec{k}}\left(\vec{r}\right)=\frac{1}{\sqrt{N}}\sum\limits_{h,j}e^{i\left(h\vec{k}\cdot\vec{a}_1 + j\vec{k}\cdot\vec{a}_2\right)} \left( c_1\phi_{\text{2p}_{z1}}\left(\vec{r}-h\vec{a}_1-j\vec{a}_2\right) + c_2 \phi_{\text{2p}_{z2}}\left(\vec{r}-h\vec{a}_1-j\vec{a}_2\right) \right) .
 $$`
 
+可代入不含时的Schrödinger，在全空间积分求解能量和波矢的色散关系.
+
+`$$ \begin{array}{a}
+\langle\phi_{\text{2p}_{z1}}|\hat{H}|\psi_{k}\rangle = E\langle\phi_{\text{2p}_{z1}}|\psi_{k}\rangle , \\ \langle\phi_{\text{2p}_{z2}}|\hat{H}|\psi_{k}\rangle = E\langle\phi_{\text{2p}_{z2}}|\psi_{k}\rangle . \end{array}$$`
+
+依旧只考虑on-site和最近邻作用:
+
+`$$ \begin{array}{a}
+\epsilon c_1 -tc_2\left(1+e^{-i\vec{k}\cdot\vec{a_1}} +  e^{-i\vec{k}\cdot\vec{a_2}}\right) = Ec_1 ,\\
+\epsilon c_2 -tc_1\left(1+e^{i\vec{k}\cdot\vec{a_1}} +  e^{i\vec{k}\cdot\vec{a_2}}\right) = Ec_2.
+\end{array} $$`
+
+其中`$\epsilon = \langle\phi_{\text{2p}_{z1}}\left(\vec{r}\right)|\hat{H}|\phi_{\text{2p}_{z1}}\left(\vec{r}\right)\rangle$` 且 `$t = - \langle\phi_{\text{2p}_{z1}}\left(\vec{r}\right)|\hat{H}|\phi_{\text{2p}_{z2}}\left(\vec{r}\right)\rangle= - \langle\phi_{\text{2p}_{z1}}\left(\vec{r}\right)|\hat{H}|\phi_{\text{2p}_{z1}}\left(\vec{r}-\frac{a}{\sqrt{3}}\hat{x}\right)\rangle$`
+
+同一维双原子体系，原胞内两个原子相同，所以其近邻关系相同，根据对称性，`$t$`在上式中相同。
+使用矩阵表示上述方程组：
+`$$ \begin{bmatrix}
+\epsilon -E & -t\left(1+e^{-i\sqrt{3}k_xa/2}e^{-ik_ya/2} +  e^{-i\sqrt{3}k_xa/2}e^{+ik_ya/2}\right) \\
+ -t\left(1+e^{i\sqrt{3}k_xa/2}e^{ik_ya/2} +  e^{i\sqrt{3}k_xa/2}e^{-ik_ya/2}\right) & \epsilon -E\end{bmatrix}\left[ \begin{array}{c} c_1 \\ c_2 \end{array} \right] =0.
+$$`
+
+行列式为零求解，使用`$2\cos x = e^{ix} + e^{-ix}$`，可得：
+
+`$$ \left(\epsilon-E\right)^2 -t^2\left(3+2\cos\left(\frac{\sqrt{3}k_xa}{2}-\frac{k_ya}{2}\right)+2\cos\left(\frac{\sqrt{3}k_xa}{2}+\frac{k_ya}{2}\right)+2\cos\left(k_ya\right)\right)=0.
+$$`
+
+使用下面三角函数关系化简：
+
+`$$ \begin{array}{a}
+\cos\left(a+b\right)=\cos\left(a\right)\cos\left(a+b\right)-\sin\left(a\right)\sin\left(a\right), \\\cos\left(a-b\right)=\cos\left(a\right)\cos\left(a+b\right)+\sin\left(a\right)\sin\left(a\right)\text{, and} \\
+\cos\left(2a\right)=2\cos\left(a\right)-1,
+\end{array} $$`
+
+可以得到最后的色散关系为：
+
+`$$E=\epsilon \pm t\sqrt{1+4\cos\left(\frac{\sqrt{3}k_xa}{2}\right)\cos\left(\frac{k_ya}{2}\right)+4\cos^2\left(\frac{k_ya}{2}\right)}.
+$$`
+
+取高对称点`$\Gamma, M, K$` 做图如下：
+
 #### h-BN (optional)
 可参照graphene的模型来给出h-BN的紧束缚解。
 
 ### 3-D 锂 (bcc) 晶体
+金属锂正常以体心立方(Body Centered Cubic --- BCC)密堆排列，
+其原胞包含一个原子，原胞的基矢如下：
+
+`$$ \begin{array}{a}
+\vec{a}_1 = \frac{a}{2} \left( \hat{x}+\hat{y}-\hat{z} \right), \\
+\vec{a}_2 = \frac{a}{2} \left( -\hat{x}+\hat{y}+\hat{z} \right), \\
+\vec{a}_3 = \frac{a}{2} \left( \hat{x}-\hat{y}+\hat{z} \right). \end{array}$$`
+
+锂元素在第二周期，价层仅有一个`$2s$`轨道，设为`$\phi_{2s}$`。其紧束缚波函数可以写为：
+
+`$$ \psi_{\vec{k}}\left(\vec{r}\right)=\frac{1}{\sqrt{N}}\sum\limits_{h,j,l}e^{i\left(h\vec{k}\cdot\vec{a}_1 + j\vec{k}\cdot\vec{a}_2 + l\vec{k}\cdot\vec{a}_3\right)} \phi_{\text{2s}}\left(\vec{r}-h\vec{a}_1-j\vec{a}_2-l\vec{a}_3\right) .
+$$`
+
+带入不含时Schrödinger方程并忽略紧邻以外的作用项可以得到：
+
+`$$ \epsilon - t e^{i\vec{k}\cdot\vec{a_1}} - t e^{i\vec{k}\cdot\vec{a_2}} - t e^{i\vec{k}\cdot\vec{a_3}} - t e^{-i\vec{k}\cdot\vec{a_1}} - t e^{-i\vec{k}\cdot\vec{a_2}} - t e^{-i\vec{k}\cdot\vec{a_3}} - t e^{i\vec{k}\cdot\left(\vec{a_1} +\vec{a}_2 +\vec{a}_3\right)} - t e^{-i\vec{k}\cdot\left(\vec{a_1} +\vec{a}_2 +\vec{a}_3\right)} + \text{small terms}= E + \text{small terms}.
+$$`
+
+其中`$\epsilon = \langle\phi_{\text{2s}}\left(\vec{r}\right)|\hat{H}|\phi_{\text{2s}}\left(\vec{r}\right)\rangle$`, 且
+`$t = - \langle\phi_{\text{2s}}\left(\vec{r}\right)|\hat{H}|\phi_{\text{2s}}\left(\vec{r}-\vec{a}_1\right)\rangle$`
+
+上式的`$t$`由于对称性对全部近邻都相等。使用基矢的关系，上式可以化为：
+
+`$$ \begin{array}{b}
+ E = \epsilon - te^{ik_xa/2}e^{ik_ya/2}e^{-ik_za/2} -te^{-ik_xa/2}e^{ik_ya/2}e^{ik_za/2} -te^{ik_xa/2}e^{-ik_ya/2}e^{ik_za/2}
+-te^{-ik_xa/2}e^{-ik_ya/2}e^{ik_za/2} \\
+-te^{ik_xa/2}e^{-ik_ya/2}e^{-ik_za/2} -te^{-ik_xa/2}e^{ik_ya/2}e^{-ik_za/2}
+ -te^{ik_xa/2}e^{ik_ya/2}e^{ik_za/2} -te^{-ik_xa/2}e^{-ik_ya/2}e^{-ik_za/2}
+\end{array} .$$`
+
+进一步利用`$2\cos x = e^{ix} + e^{-ix}$`化简为:
+
+`$$ E = \epsilon - 8t\cos\left(k_xa/2\right)\cos\left(k_ya/2\right)\cos\left(k_za/2\right) .
+$$`
+
+选取高对称点`$P, \Gamma, N, H, \Gamma$`可以得到下左图的能带色散曲线：
+
+与第一性原理的结果（下右图）的结果比较可以看出，
