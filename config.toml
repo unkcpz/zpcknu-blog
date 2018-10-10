@@ -29,6 +29,12 @@ PygmentsStyle = "tango"
     name = "Tags"
     url = "/tags/"
     weight = 4
+
+# My Own menu to list post For Fun.. Life
+[[menu.mine]]
+    name = "Oh Me! Oh Life!"
+    url = "/tags/"
+    weight = 1
 [params]
 description = "A website built through Hugo and blogdown."
 footer = "&copy; [Jason Yu](http://morty.tech/about/) 2017 -- 2018 | [Github](https://github.com/unkcpz) || FRIENDS LINKS:: [花草茶](https://changchunhe.github.io/) | [道长](https://shaobinqiu.github.io/)"
