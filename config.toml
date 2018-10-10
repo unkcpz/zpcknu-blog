@@ -33,7 +33,7 @@ PygmentsStyle = "tango"
 # My Own menu to list post For Fun.. Life
 [[menu.mine]]
     name = "Oh Me! Oh Life!"
-    url = "/tags/"
+    url = "/lifehome/"
     weight = 1
 [params]
 description = "A website built through Hugo and blogdown."
