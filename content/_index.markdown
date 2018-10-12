@@ -18,6 +18,22 @@ title =  "Home"
 > --- Archlinux Meme
 
 
-`$${\sqrt {n}}\left(\left({\frac {1}{n}}\sum _{i=1}^{n}X_{i}\right)-\mu \right)\ {\xrightarrow {d}}\ N\left(0,\sigma ^{2}\right)$$`
+<!-- `$${\sqrt {n}}\left(\left({\frac {1}{n}}\sum _{i=1}^{n}X_{i}\right)-\mu \right)\ {\xrightarrow {d}}\ N\left(0,\sigma ^{2}\right)$$` -->
 
-All pages not `$\int$` under the root directory of the website are listed below. You can also visit the list page of a single section, e.g., [posts](/posts/), or [notes](/note/). See the [About](/about/) page for the usage of this theme.
+`$$
+\begin{align}
+&\nabla \cdot \vec{E}  =  \frac{\rho}{\varepsilon_0}\\
+(\vec{B} \quad Fields) \quad &\nabla \cdot \vec{B}  =  0\\
+&\nabla \times \vec{E}  = - \frac{\partial \vec{B}}{\partial t}\\
+&\nabla \times \vec{B}  =  \mu_0 \vec{J} + \mu_0\varepsilon_0\frac{\partial \vec{E}}{\partial t}
+\end{align}$$`
+
+### aBOUT mE
+
+2010-2014 西北工业大学  酱油
+
+2014-2017 中科院福建物质结构所  酱油
+
+2017-now  华南理工大学  学徒
+
+A Uxorious Husband. A Linux User. An Archer. A Gopher. A Pythoner. A Learner.
