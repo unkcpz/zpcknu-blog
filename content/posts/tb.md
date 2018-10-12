@@ -59,6 +59,8 @@ $$`
 
 对每一个原子轨道做如上操作，组成方程组，求解可得体系的能带。
 
+#### 非正交项 (optional)
+
 ### 1-D 一维单原子晶体
 
 考察拥有一个价层轨道 `$\phi$` 构成的一维晶体。体系紧束缚的波函数可以写为：
@@ -174,7 +176,9 @@ $$`
 `$$E=\epsilon \pm t\sqrt{1+4\cos\left(\frac{\sqrt{3}k_xa}{2}\right)\cos\left(\frac{k_ya}{2}\right)+4\cos^2\left(\frac{k_ya}{2}\right)}.
 $$`
 
-取高对称点`$\Gamma, M, K$` 做图如下：
+取高对称点`$\Gamma, M, K$` 做图如下(`$\epsilon=0, t=1, a=1$`)：
+
+![](/images/graphene.png)
 
 #### h-BN (optional)
 可参照graphene的模型来给出h-BN的紧束缚解。
