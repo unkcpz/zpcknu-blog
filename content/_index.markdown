@@ -20,13 +20,15 @@ title =  "Home"
 
 <!-- `$${\sqrt {n}}\left(\left({\frac {1}{n}}\sum _{i=1}^{n}X_{i}\right)-\mu \right)\ {\xrightarrow {d}}\ N\left(0,\sigma ^{2}\right)$$` -->
 
-`$$
+<!-- `$$
 \begin{align}
 &\nabla \cdot \vec{E}  =  \frac{\rho}{\varepsilon_0}\\
 (\vec{B} \quad Fields) \quad &\nabla \cdot \vec{B}  =  0\\
 &\nabla \times \vec{E}  = - \frac{\partial \vec{B}}{\partial t}\\
 &\nabla \times \vec{B}  =  \mu_0 \vec{J} + \mu_0\varepsilon_0\frac{\partial \vec{E}}{\partial t}
-\end{align}$$`
+\end{align}$$` -->
+
+`$$\frac{\partial L}{\partial q} - \frac{d}{dt}\frac{\partial L}{\partial \dot{q}} = 0$$`
 
 ### aBOUT mE
 
