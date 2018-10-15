@@ -122,7 +122,7 @@ $$`
 $$`
 如下图：
 
-
+![](/images/1d-2atom.png)
 
 ### 2-D 石墨烯 (Graphene)
 Graphene为二维六角晶格，其中原胞包含两个Carbon原子`$C_1$`和`$C_2$`，位于不等价的Wickoff位点。
@@ -183,6 +183,41 @@ $$`
 #### h-BN (optional)
 可参照graphene的模型来给出h-BN的紧束缚解。
 
+只改变on-site的参数(`$\epsilon_0=-1, \epsilon_1=1, t=1, a=1$`)。可以得到如下的能带结构：
+
+![](/images/h-XY.png)
+
+模型的信息为：
+
+```text
+---------------------------------------
+report of tight-binding model
+---------------------------------------
+k-space dimension           = 2
+r-space dimension           = 2
+number of spin components   = 1
+periodic directions         = [0, 1]
+number of orbitals          = 2
+number of electronic states = 2
+lattice vectors:
+ #  0  ===>  [     1.0 ,     0.0 ]
+ #  1  ===>  [     0.5 ,   0.866 ]
+positions of orbitals:
+ #  0  ===>  [  0.3333 ,  0.3333 ]
+ #  1  ===>  [  0.6667 ,  0.6667 ]
+site energies:
+ #  0  ===>       1.0
+ #  1  ===>      -1.0
+hoppings:
+<  0 | H |  1 + [  0 ,  0 ] >     ===>     -1.0 +     0.0 i
+<  1 | H |  0 + [  1 ,  0 ] >     ===>     -1.0 +     0.0 i
+<  1 | H |  0 + [  0 ,  1 ] >     ===>     -1.0 +     0.0 i
+hopping distances:
+|  pos(  0 )  - pos(  1 + [  0 ,  0 ] ) |  =    0.5774
+|  pos(  1 )  - pos(  0 + [  1 ,  0 ] ) |  =    0.5774
+|  pos(  1 )  - pos(  0 + [  0 ,  1 ] ) |  =    0.5774
+```
+
 ### 3-D 锂 (bcc) 晶体
 金属锂正常以体心立方(Body Centered Cubic --- BCC)密堆排列，
 其原胞包含一个原子，原胞的基矢如下：
@@ -221,4 +256,8 @@ $$`
 
 选取高对称点`$P, \Gamma, N, H, \Gamma$`可以得到下左图的能带色散曲线：
 
-与第一性原理的结果（下右图）的结果比较可以看出，
+与第一性原理的结果（下右图）的结果比较可以看出(`$\epsilon=0, t_0=-1, t_1=-0.1, a=1$`)，
+
+下图的`jupyter notebook`源码，请访问[BCC-Tight-Binding jupyter](https://github.com/unkcpz/images/blob/master/zpcknu-blog/bcc-tb.ipynb)
+
+![](/images/bcc-tb.png)
