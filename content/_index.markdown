@@ -9,13 +9,15 @@ title =  "Home"
 <br>
 <br>
 
-> Wubba lubba dub dub.
->
-> --- Rick Sanchez
+```text
+Wubba lubba dub dub.
 
-> I use Arch, btw.
->
-> --- Archlinux Meme
+                    —— Rick Sanchez
+
+I use Arch, btw.
+
+                    —— Archlinux Meme
+```
 
 
 <!-- `$${\sqrt {n}}\left(\left({\frac {1}{n}}\sum _{i=1}^{n}X_{i}\right)-\mu \right)\ {\xrightarrow {d}}\ N\left(0,\sigma ^{2}\right)$$` -->
