@@ -4,9 +4,23 @@ Description = ""
 Tags = ["aiida"]
 Categories = ["plan"]
 date = 2018-10-24
+lastmod = 2018-10-29
 +++
 
-## Aiida使用难点和规划
+# Aiida使用难点和规划
+
+## 2018-10-29
+
+### 进展
+10-24的内容全部完成，可以使用Aiida-vasp，并对生成的结果在数据库中实现查询。
+
+### 计划
+对vasp的WorkChain的每一个参数和没一个调用熟悉。可以熟练的修改和调用真个plugin，并
+编写自己可用的WorkChain。其中，显性的任务是加入group的参数输入和查询。
+
+使用这样的WorkChain，完成石墨烯F掺杂的覆盖度相图绘制。
+
+## 2018-10-24
 
 ### 当前进展
 可以使用各种WorkChain，并基本熟悉WorkChain的编写流程。
