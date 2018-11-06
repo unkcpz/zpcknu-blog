@@ -7,10 +7,10 @@ Tag = ["code", "eos", "science"]
 +++
 
 ## 完整代码下载
-[code](https://github.com/unkcpz/images/blob/master/zpcknu-blog/fit-bm-eos.py)
+[code下载](https://github.com/unkcpz/images/blob/master/zpcknu-blog/fit-bm-eos.py)
 
 运行后生成下图：
-![](https://github.com/unkcpz/images/blob/master/zpcknu-blog/fit-bm.png)
+![](https://raw.githubusercontent.com/unkcpz/images/master/zpcknu-blog/fit-bm.png)
 
 
 ## 代码部分解释
