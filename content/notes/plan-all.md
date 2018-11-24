@@ -26,6 +26,13 @@ lastmod = 2018-11-22
 ### C-doped BN article
 *优先级: !!!*
 
+### TM-Boron
+*优先级: !!!*
+
+- [ ] 能带WorkChain
+- [ ] 数据库内容设定
+- [ ] 各种挖空结构的产生
+
 ### F-doped Graphene Intro
 *优先级: !!!!* <span style="color:green">*DONE*</span>
 
