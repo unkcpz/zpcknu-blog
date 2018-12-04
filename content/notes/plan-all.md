@@ -23,6 +23,11 @@ lastmod = 2018-11-22
 ### SnBi 半导体
 *优先级: !*
 
+- [x] 实验stack
+- [x] 衬底更大和更小的stack
+- [x] Bi/Si(111)stack作为稳定相
+- [x] stack时的位移
+
 ### C-doped BN article
 *优先级: !!!*
 
@@ -42,4 +47,7 @@ lastmod = 2018-11-22
 - [x] 如何将多重度信息在Aiida Workflow中加入??
 
 ### Julia DFT
+*优先级: oo*
+
+### Giida
 *优先级: oo*
