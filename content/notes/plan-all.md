@@ -11,7 +11,7 @@ lastmod = 2018-11-22
 
 - [ ] C-doped BN article
 - [x] F-doped Graphene Intro
-- [ ] SnBi Simiconductor WorkFlow Test
+- [x] SnBi Simiconductor WorkFlow Test
 - [x] 中期
 
 ### 中期
