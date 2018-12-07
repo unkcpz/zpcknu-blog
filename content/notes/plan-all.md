@@ -27,6 +27,7 @@ lastmod = 2018-11-22
 - [x] 衬底更大和更小的stack
 - [x] Bi/Si(111)stack作为稳定相
 - [x] stack时的位移
+- [ ] 文献和草稿
 
 ### C-doped BN article
 *优先级: !!!*
