@@ -12,10 +12,10 @@ lastmod = 2018-11-22
 - [ ] C-doped BN article
 - [x] F-doped Graphene Intro
 - [x] SnBi Simiconductor WorkFlow Test
-- [x] 中期
+- [ ] 中期
 
 ### 中期
-*优先级: !*
+*优先级: !!!!*
 
 - [x] 时间安排
 - [ ] 考核slide
@@ -31,6 +31,9 @@ lastmod = 2018-11-22
 
 ### C-doped BN article
 *优先级: !!!*
+
+- [x] Introductrion
+- [ ] 二次修改,结构调整,和文献索引添加
 
 ### TM-Boron
 *优先级: !!!*
@@ -49,6 +52,11 @@ lastmod = 2018-11-22
 
 ### Julia DFT
 *优先级: oo*
+
+- [x] 初始化随机波函数
+- [x] 网格的设定
+- [x] 从初始波函数得到实空间的电子密度
+- [ ] 等待重构和PCG求解
 
 ### Giida
 *优先级: oo*
