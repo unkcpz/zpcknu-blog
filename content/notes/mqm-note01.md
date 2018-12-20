@@ -3,7 +3,6 @@ title = "现代量子力学笔记(一): 实验和意念显现"
 Tags = ["note", "physics", "quantum"]
 Categories = ["note"]
 date = 2018-12-18
-draft = true
 +++
 
 ## Stern-Gerlach 实验
@@ -46,3 +45,52 @@ Stern-Gerlach Sequential实验的最后一个结果与经典直觉所理解的�
 
 ## Stern-Gerlach结果与经典光学的类比
 上面的结果使我们想到经典光学中类似的情况:
+沿z方向传播,沿x方向偏振的单色光为:
+`$$\mathbf{E}=E_0 \mathbf{\hat{x}} \cos(kz-\omega t)$$`
+沿z方向传播,沿x方向偏振的单色光为:
+`$$\mathbf{E}=E_0 \mathbf{\hat{y}} \cos(kz-\omega t)$$`
+
+使用偏振片可以将一束同时含有x和y方向的光分成分别沿着x方向和y方向偏振的光.
+在这里偏振片的效果如同SG实验中的一个SG装置.
+
+与上面的串联的SG实验类比,当x偏振片后,出射光只剩下沿着x方向振动的部分,而没有y方向振动的部分.
+如何重新获得这一部分? 我们使用沿着x和y方向夹角45度的方向放置一个偏振片,使得光沿着`$\mathbf{\hat{x}}^{'}$`
+方向偏振,则再次经过y方向的偏振片后便又能重新获得沿y方向的偏振光.
+
+而如果不经过沿着45度方向的偏振片,直接通过y方向的偏振片,是无法获得沿着y方向的偏振光的.
+
+我们可以做如下完整的类比:
+`$$S_{z}\pm \iff x-, y- \mathrm{polarized\  light}$$`
+`$$S_{x}\pm \iff x'-, y'- \mathrm{polarized\  light}$$`
+(fig)
+
+沿着`$\mathbf{\hat{x}}^{'}$`和`$\mathbf{\hat{y}}^{'}$`方向的光使用向量的组合方式可以写成如下形式:
+`$$E_0 \mathbf{\hat{x}}'\cos(kz-\omega t)=E_0\left[\frac{1}{\sqrt{2}}\mathbf{\hat{x}}\cos(kz-\omega t)+\frac{1}{\sqrt{2}}\mathbf{\hat{y}}\cos(kz-\omega t) \right]$$`
+`$$E_0 \mathbf{\hat{y}}'\cos(kz-\omega t)=E_0\left[-\frac{1}{\sqrt{2}}\mathbf{\hat{x}}\cos(kz-\omega t)+\frac{1}{\sqrt{2}}\mathbf{\hat{y}}\cos(kz-\omega t) \right]$$`
+
+对应到Stern-Gerlach实验,我们将结果写为如下形式以完成类比:
+`$$|S_x;+\rangle=\frac{1}{\sqrt{2}}|S_z;+\rangle + \frac{1}{\sqrt{2}}|S_z;-\rangle$$`
+`$$|S_x;-\rangle=-\frac{1}{\sqrt{2}}|S_z;+\rangle + \frac{1}{\sqrt{2}}|S_z;-\rangle$$`
+
+这里漏掉了S-G实验中的`$S_y$`的情况,如何表示`$S_y$`?这个分量对`$S_z$`的行为和`$S_x$`是等同的,
+但三者互相之间又是不同的.
+在经典光学中引入圆偏振光,对`$S_y$`进行类比:
+`$$S_{y}+\iff \mathrm{right\  circularly\  polarized\  light}$$`
+`$$S_{y}- \iff \mathrm{left\  circularly\  polarized\  light}$$`
+
+左旋和右旋的偏振光可以写为:(引入复数的写法)
+`$$\mathbf{\epsilon}=\left[\frac{1}{\sqrt{2}}\mathbf{\hat{x}}e^{i(kz-\omega t)} \pm \frac{i}{\sqrt{2}}\mathbf{\hat{y}}e^{i(kz-\omega t)} \right]$$`
+
+回到S-G实验,可以得到`$S_y$`如下:
+`$$|S_y;\pm\rangle=\frac{1}{\sqrt{2}}|S_z;+\rangle \pm \frac{i}{\sqrt{2}}|S_z;-\rangle$$`
+
+## 总结
+从以上的实验可以看到与经典不同的结果,让我们开始有必要用到新的手段来描述问题.
+
+有经验的读者可能会感觉用光来对应实验,与其说是类比,不如说是完全等同,因为由于波粒二向性,光可以用光子来描述.
+实际上,上面的类比没有用到光子(photon)的概念,完全使用的是经典的电磁波理论.
+
+这样的实验和类比引导我们使用新的工具来研究微观的新现象.
+下一节则描述了描述的工具和数学方法.
+
+[`$\mapsto$`现代量子力学笔记(二): 意念具象化?数学和符号!]({{< relref "/notes/mqm-note02.md" >}})
