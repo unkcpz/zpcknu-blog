@@ -57,6 +57,9 @@ A,B的测量不会互相破坏信息(do not interfere),如下:
 
 测不准原理:
 `$$⟨(ΔA)^2⟩⟨(ΔB)^2⟩≥\frac{1}{4}|⟨[A,B]⟩|^2.$$`
-<hr>
+<!-- <hr>
 `$\mathcal{Proof:}$`
-<hr>
+Using Schwarz inequality:
+`$$⟨(ΔA)^2⟩⟨(ΔB)^2⟩≥|⟨ΔAΔB⟩|^2$$`
+`$$ΔAΔB=\frac{1}{2}[ΔA,ΔB]+\frac{1}{2}\{ΔA,ΔB\},$$`
+<hr> -->
