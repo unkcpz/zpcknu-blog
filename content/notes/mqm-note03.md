@@ -4,6 +4,7 @@ Tags = ["note", "physics", "quantum"]
 Categories = ["note"]
 date = 2018-12-21
 +++
+该部分笔记与Sakurai现代量子力学(1.4)对应
 
 ## 测量
 
@@ -63,3 +64,5 @@ Using Schwarz inequality:
 `$$⟨(ΔA)^2⟩⟨(ΔB)^2⟩≥|⟨ΔAΔB⟩|^2$$`
 `$$ΔAΔB=\frac{1}{2}[ΔA,ΔB]+\frac{1}{2}\{ΔA,ΔB\},$$`
 <hr> -->
+
+[`$\leftarrow$`现代量子力学笔记(二)]({{< relref "/notes/mqm-note02.md" >}})[`$\mapsto$`现代量子力学笔记(四)]({{< relref "/notes/mqm-note04.md" >}})

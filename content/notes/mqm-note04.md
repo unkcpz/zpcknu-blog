@@ -4,6 +4,7 @@ Tags = ["note", "physics", "quantum"]
 Categories = ["note"]
 date = 2018-12-24
 +++
+该部分笔记与Sakurai现代量子力学(1.5)对应
 
 ## 算符
 这里,我们希望得到两个非对易算符的两组本征向量之间的关系.
@@ -46,3 +47,5 @@ unitary算符:
 ## Unitary Equivalent Observables (互相幺正的算符)
 对一个算符,我们可以构造一个相互幺正的算符`$UAU^{-1}$`.
 该算符与原算符有这样关系,对应各自的本征向量,他们有相同的本征值.
+
+[`$\leftarrow$`现代量子力学笔记(三)]({{< relref "/notes/mqm-note03.md" >}})[`$\mapsto$`现代量子力学笔记(五)]({{< relref "/notes/mqm-note05.md" >}})
