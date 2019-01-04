@@ -4,7 +4,7 @@ date = 2018-11-19
 Tags = ["plan"]
 Categories = ["plan"]
 Description = ""
-lastmod = 2018-11-22
+lastmod = 2019-01-03
 +++
 
 ## 整体内容
@@ -18,7 +18,7 @@ lastmod = 2018-11-22
 *优先级: !!!!*
 
 - [x] 时间安排
-- [ ] 考核slide
+- [x] 考核slide
 
 ### SnBi 半导体
 *优先级: !*
@@ -27,7 +27,10 @@ lastmod = 2018-11-22
 - [x] 衬底更大和更小的stack
 - [x] Bi/Si(111)stack作为稳定相
 - [x] stack时的位移
-- [ ] 随SiH化学式变化
+- [ ] 两倍的衬底
+- [ ] 换衬底
+- [ ] 能隙大小查看
+- [x] 随SiH化学式变化
 - [ ] 文献和草稿
 
 
@@ -35,14 +38,16 @@ lastmod = 2018-11-22
 *优先级: !!!*
 
 - [x] Introductrion
-- [ ] 二次修改,结构调整,和文献索引添加
+- [x] 二次修改,结构调整,和文献索引添加
+- [ ] summary
+- [ ] 第一性原理部分和结构产生部分
 
 ### TM-Boron
 *优先级: !!!*
 
-- [ ] 能带WorkChain
+- [x] 能带WorkChain
 - [ ] 数据库内容设定
-- [ ] 各种挖空结构的产生
+- [x] 各种挖空结构的产生
 
 ### F-doped Graphene Intro
 *优先级: !!!!* <span style="color:green">*DONE*</span>
