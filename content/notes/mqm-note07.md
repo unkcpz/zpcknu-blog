@@ -35,3 +35,8 @@ unitary算符在为位移算符或时间演化算符时,会让一个体系的态
 
 第一种方式就是Shrödinger picture第二种是Heisenberg picture, 其中Heisenberg picture描述了
 算符随时间的变化,这和经典力学中的变化描述是相同的.
+
+## Ehrenfest's Theorem
+`$$m\frac{d^2}{dt^2}⟨\mathbf{x}⟩=\frac{d⟨\mathbf{p}⟩}{dt}=-⟨∇V(\mathbf{x})⟩.$$`
+
+...

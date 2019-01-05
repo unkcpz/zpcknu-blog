@@ -30,7 +30,7 @@ I use Arch, btw.
 &\nabla \times \vec{B}  =  \mu_0 \vec{J} + \mu_0\varepsilon_0\frac{\partial \vec{E}}{\partial t}
 \end{align}$$` -->
 
-`$$\frac{\partial L}{\partial q} - \frac{d}{dt}\frac{\partial L}{\partial \dot{q}} = 0$$`
+`$$\frac{∂\mathscr{L}}{∂q} - \frac{d}{dt}\frac{∂\mathscr{L}}{∂ \dot{q}} = 0.$$`
 
 ### aBOUT mE
 
