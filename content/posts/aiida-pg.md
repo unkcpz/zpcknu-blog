@@ -134,6 +134,21 @@ Accessing database with following command:
 $ psql -h localhost -p 5432 -d aiidadb -U aiida
 ```
 
+Or you can start and stop with the virtualenv by editing `activate` file of the virtualenv.
+Add following lines in `deactivate()` function to stop docker container when deactivate the virtualenv:
+
+```bash
+{docker stop $DOCKER_DB_NAME} || {echo "Docker DB not running"}
+```
+
+Add following lines in activate parts to start docker container when activate the virtualenv.
+```bash
+DOCKER_DB_NAME="<docker-container-name>"
+docker run --rm --user 1000:1000  --name $DOCKER_DB_NAME -v aiida-dev-db:/var/lib/postgresql/data -p 5432:5432 -d unkcpz/aiida_pg:9.6.10
+echo "Start Docker DB container $DOCKER_DB_NAME"
+```
+
+
 ## Backup and Restore the database
 
 Backup:
