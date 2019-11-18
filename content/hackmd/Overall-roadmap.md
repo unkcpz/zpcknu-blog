@@ -102,3 +102,10 @@ First, install the DPMD-kit and have a trail.
 ## Appendix 
 
 ### Roadmap of DPMD training for CZTS
+
+Here I define the steps to training the potential of CZTS alloy by DPMD. 
+
+1. The initial configurations are coming from the enumeration of small volume supercell
+2. The exploration of the process are seperated into two level, first the temperature, second the MC+MD simulation.
+
+The temperature range from 0K to 2000K which cover the experimental temperature of two order-disorder phase transition. 
