@@ -1,5 +1,5 @@
 +++
-title="GSoC Log: Proposal"
+title="GSoC Logs: Proposal"
 date=2020-04-01
 Tags=["GSoC", "AiiDA"]
 Category=["Note"]

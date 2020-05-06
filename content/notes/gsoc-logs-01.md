@@ -1,5 +1,5 @@
 +++
-title="GSoC Log: PR descriptions of plumpy"
+title="GSoC Logs: plumpy"
 date=2020-04-29
 Tags=["GSoC", "AiiDA"]
 Category=["Note"]
@@ -38,4 +38,4 @@ This provides the following advantages over an empty class[^simpleNamespace]:
 #### Can not get rid of `SavableFuture._tb_logger`
 The class `SavableFuture` is inherited from `tornado.concurrent.Future`
 The `_tb_logger` still be used in tornado's Future. So It can only be
-get rid of after remove the need of tornado Future. 
+get rid of after remove the need of tornado Future.
