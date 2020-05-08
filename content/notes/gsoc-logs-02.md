@@ -72,7 +72,8 @@ it is asynchronous with process, they are running in the same event loop of runn
 
 When a function is running by using `exponential_backoff_retry`, the function
 is first change to a coroutine if is not. Then the function is retry until it
-is successfully run. The `exponential_backoff_retry` itself is a coroutine, and is
+is successfully run. The `exponential_backoff_retry` itself is a coroutine since
+it should not block other steps of process, and it is
 run in an event loop. Every time the function is retried, `exponential_backoff_retry`
 adds a asynchronous counter to count the time to wait the function to be run.
 The time of counter is exponentially increased. Therefore, it is named `exponential_backoff_retry`.
@@ -90,3 +91,51 @@ And this seems like the first thing should be done before refactoring from torna
 `continue_process` receive pid of process as input and running the process. The pid
 is stored in some media of a persist process. `launch_process` directly running
 the incoming process, by initialize the process class to corresponding object.
+
+Here, I can try to add a test for redefined `_continue` function in aiida `ProcessLauncher`.
+
+## May-08
+
+#### Why use `raise gen.Return(result)` in process_function
+
+In decorator `process_function` which wrap the turn the function into
+a FunctionProcess. If process is executed not in a daemon but in a local runner,
+aiida is listen to the signal of interrupt and handle the signal with `kill_process`
+function which raise a critical log and kill the running process elegantly. However,
+here in the `kill_process`, the result is returned by `raise gen.Return(result)`. I am
+confused that this function is not a coroutine, why use such syntax? Can we directly return
+the result?  
+
+#### Transport tasks
+
+The mechanism that allowed engine connecting to the remote machine is called transport,
+and the transport tasks are the tasks performed in transport stage. The transport tasks
+happened in `CalcJob` process. First of all, `CalcJob` overwrite the `run` method of
+Process class. It enter the UPLOAD state by `plumpy.Wait` when run by `run` method. Then after UPLOAD
+state, it enter the SUBMIT and then UPDATE and then RETRIEVE state step by step.
+
+The state transition in Waiting state of `CalcJob` is done by `create_state` methods which
+are defined in function `upload`, `submit`, `update` and `retrieve`. Everytime the process
+got its change to run, it will check its current state and tries to move to next state.
+
+#### Question: different between `submit` functions of runner and launch module.
+
+There are two similar `submit` method both in `aiida/engine/launch` module and
+`aiida/engine/runner`. What's the different? And when to use which?
+
+Please check: https://aiida.readthedocs.io/projects/aiida-core/en/latest/working/workflows.html#submitting-sub-processes
+The runner submit is used in subworkflow submitting specifically. In work chain, the upper process
+should wait until the subprocess is surely finished, and the future to resolved, before continue.
+
+Although I get the explanation of their difference in design, I still unable to find the
+real implementation different between them. They both run with `controller.continue_process`
+with `nowait=False` and `no_reply=True`.
+
+#### up bound the number of jobs in the schedule queue
+
+This is the requirement mentioned in the [issue#88](https://github.com/aiidateam/aiida-core/issues/88).
+Even the user case is not very common, to extend the usage of the software is always seems
+like not a bad thing. After look into the code base, I assumed this functionality should be
+added in `aiida/engine/processes/calcjobs/task.py::task_submit_job`. Before actually
+submit the uploaded job by `execmanager`, inspect the number of jobs queued at the
+scheduler of a specific user. Only submit the job when the number limitation is unreached.
