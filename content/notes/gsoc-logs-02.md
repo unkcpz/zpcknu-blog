@@ -3,7 +3,7 @@ title="GSoC Logs: aiida_core"
 date=2020-05-06
 Tags=["GSoC", "AiiDA"]
 Category=["Note"]
-lastmod=2020-05-07
+lastmod=2020-05-08
 +++
 
 ## Description
@@ -139,3 +139,15 @@ like not a bad thing. After look into the code base, I assumed this functionalit
 added in `aiida/engine/processes/calcjobs/task.py::task_submit_job`. Before actually
 submit the uploaded job by `execmanager`, inspect the number of jobs queued at the
 scheduler of a specific user. Only submit the job when the number limitation is unreached.
+
+## May-09
+
+#### analyse the code of circus part in aiida_core
+
+One thing to sure, is from start to end, only one circus watcher is
+created and used and spawn many processes(system) for running processes(AiiDA).
+
+Here are something I am not fully understanded.
+1. Are the daemon processes start by circus independent? Can they communicate with other
+processes? And how?
+2. `verdi` command launch aiida processes to daemon, how circus balance load them?
