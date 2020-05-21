@@ -3,7 +3,7 @@ title="GSoC Logs: aiida_core"
 date=2020-05-06
 Tags=["GSoC", "AiiDA"]
 Category=["Note"]
-lastmod=2020-05-08
+lastmod=2020-05-19
 +++
 
 ## Description
@@ -151,3 +151,18 @@ Here are something I am not fully understanded.
 1. Are the daemon processes start by circus independent? Can they communicate with other
 processes? And how?
 2. `verdi` command launch aiida processes to daemon, how circus balance load them?
+
+
+## May-19
+
+#### add new feature so that specific type node can be quickly spot in the graph
+
+In order to find the initial configuration of a final most stable structure in my
+field research, it is easy to use AiiDA and pick the initial configuration from
+the provenance graph. However, sometimes when the workflow is very complex, it is
+not very easy to recognize the desired nodes from provenance graph. To overcome
+this, I simply add an option `--target-cls` to `verdi node graph generate` to
+colored the nodes with expected class and left other types of nodes decolorized.
+
+The details can be found in https://github.com/aiidateam/aiida-core/pull/4081 .
+This PR also fix the origin node highlight [feature](https://github.com/aiidateam/aiida-core/issues/3718).

@@ -16,7 +16,7 @@ However, when the result coming with the undesired imaginary frequencies, can we
 simply ignore it to say that our configuration is at its stable phase? Or we
 have to dig into the details of the causing imaginary frequencies? And how small
 is small enough to ignore these imaginary frequencies?
-Most real life occurring question when using frozen phonon method (such as phonopy [1] by Prof.Togo)
+Most real life occurring question when using frozen phonon method (such as phonopy [^phonopy] by Prof.Togo)
 is that can we eliminate the imaginary frequencies by extending the supercell?
 
 To answer this question, we should firstly have the physical intuitive of what
@@ -45,7 +45,7 @@ This problem will not happened if we use the DFTP method where we do not use sup
 size as a variable.
 
 Additional to the long interaction range, there are some non-negligible reasons
-which may be the source of soft modes[2] no matter we use frozen phonon or DFTP
+which may be the source of soft modes[^softmode] no matter we use frozen phonon or DFTP
 methods:
 - If the crystal is magnetic, and there exists some phonon-magnetic coupling, the phonon dispersion curves may depend whether one treats the crystal as non-magnetic, or ferro-, or antiferromagnetically.
 - If in the crystal exhibits strong electron correlation, then the electronic band structures, and phonons must be calculated within the LDA+U, or GGA+U approach.
@@ -54,5 +54,5 @@ Some more important things need to be noticed when to find the stable transition
 phase from the one with imaginary frequencies. We should find these structures by
 using supercells which have the same symmetry of the searched low symmetry phase.
 
-[1] https://phonopy.github.io/phonopy/
-[2] http://www.computingformaterials.com/phoncfm710/3faq/100softmode1.html
+[^phonopy] https://phonopy.github.io/phonopy/
+[^softmode] http://www.computingformaterials.com/phoncfm710/3faq/100softmode1.html

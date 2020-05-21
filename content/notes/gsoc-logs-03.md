@@ -64,3 +64,15 @@ def future_add_done_callback(  # noqa: F811
     else:
         future.add_done_callback(callback)
 ```
+
+## May-21
+
+#### `RuntimeError: Event loop is closed` for tornado < 5.0.2
+
+Tutor Sebastiaan report that some tests failed when tornado==5.0.0.
+By check that, I assume the problem was caused from the bug of tornado<5.0.2
+itself. From tornado [release note 5.0.2](https://www.tornadoweb.org/en/stable/releases/v5.0.2.html),
+there is a bug that will failed in close the event loop in `tearDown` setup.
+Update the dependency tornado to higher version fix this. And to make sure this
+is not the fluke, I run the failed test independently, so the loop close procedure
+in `tearDown` setup will not take effect. Fortunately, the test passed as expected.
