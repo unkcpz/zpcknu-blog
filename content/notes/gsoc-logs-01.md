@@ -3,7 +3,7 @@ title="GSoC Logs: plumpy"
 date=2020-04-29
 Tags=["GSoC", "AiiDA"]
 Category=["Note"]
-lastmod=2020-05-16
+lastmod=2020-06-05
 +++
 
 ## Description
@@ -89,3 +89,162 @@ It should be noticed that all thread transition procedure is done by `plumpy.fut
 
 As summary, there are only to place where the code call `run_coroutine_threadsafe` to correctlly
 schedule the callback to event loop. One in `_schedule_rpc` and one in `create_task`.
+
+## 26th-May
+
+#### Adding doc to plum
+
+The branch named `gsoc-doc` will include the commits of docstring and documentation
+change of plum.
+The documentation is plan to consist by three part. a) The docstring of often used
+functions, which will show up in the API doc, primary for developers. b) The self-explain examples. These
+examples are primary for ultimate users. By learning from these examples, users can
+quickly know how to create their process and control the processes by process_controller.
+c) The documentation is for both developers and users. Held at readthedocs, the
+documentation will contain the content of how to install the plum, how to use plum
+to create and control the process, and how to embed the plum into your own project,
+and for developers, give some important concepts about why the kiwi was needed to
+control the process from another thread etc. For users, the concepts part will contains
+some statement about the properties of the processes in plum, such as how to save
+and load a persist process, how to create process with desired namespace and the
+properties of namespace feature. Last but not least, tell user how to create the
+workflow which is also a process but has the abilities to define the logical running flow
+in it.
+
+Today, I writing the introduction section of plumpy, and re-organized the structure
+of the documentation. Adding and independent the section 'Controller'.
+
+#### Some concepts
+
+- INPUTS_RAW v.s. INPUTS_PARSE in BundleKeys.
+
+#### Some minor changes
+
+- remove event from state running in resume method of `Process`
+
+
+## 29th-May
+
+#### Accurate use the event loop
+
+When should I create a new event loop? When should I use `set_event_loop`. Make
+a summary here, and describe the whole story use my own words.
+
+...
+
+
+## 3rd-June
+
+#### loop.close() v.s. loop.stop() of asyncio event loop
+
+You can image that `loop.close()` and `loop.stop()`, they are similar to next song and stop this song. If you don't need this song, so next one.
+
+`loop.stop()` is used with `run_forever()` in order to stop the forever running loop.
+
+#### Control the loop after using `nest_asyncio`
+
+Have to reset loop to the original loop after `run_until_complete()`. Maybe
+a bug in `nest_asyncio`
+
+#### `nest_asyncio` conflict with ContextVar
+
+Here, I test contextvar working with `nest_asyncio`, and find
+contextvar save the variable in a same loop. If I running the nested process
+in the same loop:
+
+```python
+def test_process_nested(self):
+    """
+    Run multiple and nested processes to make sure the process stack is always correct
+    """
+    loop = asyncio.get_event_loop()
+    class StackTest(plumpy.Process):
+
+        def run(self):
+            pass
+
+    class ParentProcess(plumpy.Process):
+
+        def run(self):
+            StackTest(loop=loop).execute()
+
+    ParentProcess(loop=loop).execute()
+```
+
+the stacks is correctly handled. However, when I running the child process in a new
+event loop:
+
+```python
+def test_process_nested(self):
+    """
+    Run multiple and nested processes to make sure the process stack is always correct
+    """
+    loop = asyncio.get_event_loop()
+    class StackTest(plumpy.Process):
+
+        def run(self):
+            pass
+
+    class ParentProcess(plumpy.Process):
+
+        def run(self):
+            StackTest(loop=asyncio.new_event_loop()).execute()
+
+    ParentProcess(loop=loop).execute()
+```
+When entering the inner `StackTest` process, the `PROCESSS_STACK` is reset to default
+value, which is not expected behavior. Need to find a right way to use contextvar
+over different event loops, I think it is supposed to do this.
+Otherwise, have to roll back to `_thread_local` approach in the old version code.
+
+
+## 4th-June
+
+#### a summary of event loop problem
+
+I make some experiment with `nest_asyncio` yesterday, here is the report.
+Before I move forward, these problems deserve more discussion.
+
+I have create some [tests](https://github.com/unkcpz/plumpy/blob/after-nest-asyncio/test/test_nest_asyncio.py) to reproduce and point out the problems after implementing
+`nest_asyncio` to enable nest process in `plumpy`.
+
+Firstly, the event loop policy is different from the code without `nest_asyncio`.
+You can check the `TestProcess_00::test_execute`, after entering and leave the process
+loop, the current instance of event loop is changed to the process one (created with `new_event_loop`).
+This not happened if you turn off the `nest_asyncio.apply()` in the beginning of this file.
+I don't know this is a design flaw or `nest_asyncio` has to be working in this way,
+some relevant discussion can be found in https://github.com/erdewit/nest_asyncio/pull/25 .
+
+Secondly, when `nest_asyncio` comming, there seems to be some flickering running
+event loops. It is also report by Martin when he running my fork code two days before.
+You can check and reproduce the error with `TestProcess_01` and `TestProcess_02` for
+comparison. The error says there is some event loop is running, but I turned the code
+upside down and can not find which loop is running.
+
+Thirdly, for py3.5 and py3.6 contextvar seems not working properly with `nest_asyncio`.
+When entering the nested loop, the variable set be contextvar is wipe out in the
+inner loop. The `contextvar` is not supported for py<3.7, so may since I use
+ the `aiocontextvar` to provide ContextVar.
+
+ Finally, I have to admit that I make a big mistake about using `@pytest.mark.asyncio`
+ under the class of `unittest.TestCase`, the test wrapped inside will always passed.
+ So I am not sure the rmq part is working as expected since the tests is not 'actually' passed.
+
+
+## 5th-June
+
+#### poll process interval problem and as a backup strategy
+ I am not very sure but I think _poll_calculation is the only mechanism here rather than the backup for the rmq broadcast. Since the on_process_finished callback is only registered in _poll_calculation but not to rmq.
+But for sure, get_calculation_futuire uses rmq broker and sets poll mechanism as backup, however this method is not called elsewhere in the code base.
+
+Or did I get it wrong?
+
+#### Discuss and temporary solve the loop reentrant problem
+
+The event loop in asyncio is not designed to be reentrant, ref https://bugs.python.org/issue33523
+
+With the help of `nest_asyncio` I am allowed to be running the loop inside the loop,
+but
+
+1. I need at the same loop.
+2. Event loop need to set back after the nest one is done(this seems like a bug of `nest_asyncio`)

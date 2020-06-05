@@ -1,6 +1,7 @@
 +++
 title="GSoC Logs: Proposal"
 date=2020-04-01
+lastmod=2020-05-26
 Tags=["GSoC", "AiiDA"]
 Category=["Note"]
 +++
@@ -90,11 +91,15 @@ Mentors will help manage interactions with the `circus` maintainers.
 
 - Replace `tornado` dependency with `asyncio` for all unittest.
 - Replace `tornado` dependency with `asyncio` for code.
+- *EDIT*: The future return from kiwi is a thread future, which can no longer yield to get the result. A elegant way
+is needed to unwrap the result from kiwi future.
 
 #### 12-16 June (4d): plumpy tests & documentation
 
-- Integration test to make sure the new version of plumpy works  well with `aiida-core==1.1` and upwards.
+- Integration test to make sure the new version of plumpy works  well with `aiida-core==1.2` and upwards.
 - Fix bugs appear in this test stage.
+- *EDIT*: Need to make sure that the changes of plumpy will minimize the code change in aiida_core, which means
+the API of plumpy should remain unchanged.
 - Document existing code of `plumpy` not only for users but for developers.
 - Turn on the missing-docstring option in pylint configuration file, and add the comprehensive docstring for useful class and methods.
 - Summarize the outcomes of this phase and prepare for the next coding phase.
@@ -105,12 +110,14 @@ Mentors will help manage interactions with the `circus` maintainers.
 
 #### 16 June - 28 June (12d): aiida-core migration & tests
 
+- *EDIT*: First, since the kiwipy is updated to asyncio, should change the aiida_core to working with the new kiwi. 
 - Replace tornado dependencies in aiida-core with asyncio
 - Start from `aiida/manager` and `aiida/engine` replaceing coroutines with `asyncio` and registing task into `asyncio` event loop.
 - Make sure the change not break other part of `aiida-core`
 - Using the event loop provided by asyncio, and registering  the process in this event loop.
 - Steps in a process are synchronous and different processes are running asynchronously. Therefore, make sure not to break this behaviour.
 - Making a comprehensive test.
+- *EDIT*: Should test aiida-core changes with both old and new version of plumpy.
 
 
 #### 28 June - 22 July (24d): migrate circus arbiter & client (stretch goal)

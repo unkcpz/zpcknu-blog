@@ -214,3 +214,125 @@ FAILED tests/transports/test_ssh.py::TestBasicConnection::test_auto_add_policy -
 FAILED tests/transports/test_ssh.py::TestBasicConnection::test_no_host_key - paramiko.ssh_exception.NoValidConnection...
 ========================= 35 failed, 1438 passed, 16 skipped, 33 warnings in 261.39s (0:04:21) =========================
 ```
+
+## 1st-June
+
+#### refactoring `InterruptableFuture` and `interrupt_task`
+
+`InterruptableFuture` is the class defined in file `aiida/engine/utils.py`.
+
+#### unittest mock the presubmit of CalcJob
+
+What is `mock.patch` of unittest used for?
+
+#### Getting stuck in WorkChain part
+
+The problem is when running nested WorkChain, the inner workchain is
+run but not returned to set Context variable. After several hours debugging, I am sure
+the inner workchain is reaching the `Finished` state, but, then the event loop
+is block by something. Can not figure out why.
+
+#### Only one event loop bond to the thread
+
+Maybe the same reason which caused the above problem. When outer most process is running,
+a process is started and running, then no other event loop is allowed to be run.
+
+To clarify my guess, the following test case passed:
+
+```python
+def test_process_nested(self):
+    """
+    Run multiple and nested processes to make sure the process stack is always correct
+    with process in new event loop.
+    """
+    expect_true = []
+
+    class StackTest(plumpy.Process):
+
+        def run(self):
+            # TODO: unexpected behaviour here
+            # if assert error happend here not raise
+            # it will be handled by try except clause in process
+            # is there better way to handle this?
+            expect_true.append(self == Process.current())
+
+    class ParentProcess(plumpy.Process):
+
+        def run(self):
+            expect_true.append(self == Process.current())
+            StackTest(loop=events.new_event_loop()).execute()
+
+    ParentProcess().execute()
+```
+
+As we can expected, it is not working for asyncio.
+For now, I find `nest_asyncio` patch package can be used to tackle this
+problem. But not sure is it the ultimate way?
+
+#### Why process_class build from FunctionProcess pass runner
+
+
+## 2nd-June
+
+#### Ha! My first code review
+
+Thanks for the chance provided by tutor [Leopold](https://github.com/ltalirz),
+this is my first code review in `aiida_core` https://github.com/aiidateam/aiida-core/pull/3977
+
+In this PR, new feature yaml config from online url is added.
+
+#### Details of single event loop problem
+
+To recap the problem I encountered which blocks me to go further. Different from
+`tornado<5.0` the event loop of asyncio (`tornado>=5.0` also use `asyncio` event loop)
+did not support running nest event loop which will raise a `RuntimeError`:
+
+```
+RuntimeError: This event loop is already running in python
+```
+
+Please reference of https://stackoverflow.com/questions/46827007/runtimeerror-this-event-loop-is-already-running-in-python
+for more details of this problem itself.
+
+In `execute` class function of `Process`, an asynchronous call of `step_until_terminated`
+is scheduled in the non-async code here and wait for the result until it is done.
+There seems not way to schedule more asynchronous calls here and wait, since the main
+thread is block by the last `loop.run_until_complete`.
+As mentioned above, `plumpy` uses this feature for nesting and execute process.
+This pattern also occurs in simple workflows and workchains of `aiida_core`,
+where the calcfunction `add` and `mul` are executed inside the `add_mul_wf` workflow:
+
+```python
+@calcfunction
+def add(data_a, data_b):
+    return data_a + data_b
+
+@calcfunction
+def mul(data_a, data_b):
+    return data_a * data_b
+
+@workfunction
+def add_mul_wf(data_a, data_b, data_c):
+    return mul(add(data_a, data_b), data_c)
+
+result, node = add_mul_wf.run_get_node(orm.Int(3), orm.Int(4), orm.Int(5))
+
+self.assertEqual(result, (3 + 4) * 5)
+self.assertIsInstance(node, orm.WorkFunctionNode)
+```
+
+Patch package `nest-asyncio` can be used to overcome this, but I am not sure about it:
+
+- Is there good way to do this without using `nest-asyncio`?
+- The nested process should be running in the same event loop of its parent process
+or a new event loop?
+
+As for the second question, I did some experiment, and here are some ideas
+and my understanding of the code base. In the `add_mul_wf` above, when a new
+`FunctionProcess` is created and run which `run_get_node`, a new runner is
+created from scratch with new_event_loop by `manager.create_runner`. It shows that in old code nested
+process is running in a different event loop. With the help of `nest-asyncio`,
+the processes can also run in a single event loop say event loop got by `asyncio.get_event_loop()`,
+only thing should notice is when all tasks are done in the loop, it will be closed automatically.
+
+If I am missing something please point it out.
