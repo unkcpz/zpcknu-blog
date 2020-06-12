@@ -3,7 +3,7 @@ title="GSoC Logs: aiida_core"
 date=2020-05-06
 Tags=["GSoC", "AiiDA"]
 Category=["Note"]
-lastmod=2020-05-19
+lastmod=2020-06-09
 +++
 
 ## Description
@@ -336,3 +336,55 @@ the processes can also run in a single event loop say event loop got by `asyncio
 only thing should notice is when all tasks are done in the loop, it will be closed automatically.
 
 If I am missing something please point it out.
+
+## 8th-June
+
+#### Replace tornado with asyncio in rmq module
+
+after that in engine test cases only:L
+
+```
+FAILED tests/engine/test_manager.py::TestJobManager::test_request_job_info_update - TypeError: coroutines cannot be u...
+FAILED tests/engine/test_runners.py::TestWorkchain::test_call_on_calculation_finish - AttributeError: '_UnixSelectorE...
+FAILED tests/engine/test_utils.py::TestInterruptable::test_interrupt - TypeError: a callable object was expected by c...
+```
+left.
+
+#### communicator hang up when disconnected
+
+The problem can be reproduce with aiida_core  https://github.com/unkcpz/aiida_core/tree/gsoc-rmq and plumpy https://github.com/unkcpz/plumpy/tree/gsoc-asyncio (and asyncio kiwipy).  By running test case
+
+```
+$ pytest tests/engine/test_rmq.py::TestProcessControl::test_kill -sv
+```
+
+And also same problems for `TestProcessControl::test_pause` .. But with process finished without exception for example `TestProcessControl::test_launch_with_inputs`  the `tearDown`  will not timeout.
+
+Now, I also test with following dependent matrix: `aiida_core` https://github.com/unkcpz/aiida_core/tree/gsoc-rmq and plumpy https://github.com/unkcpz/plumpy/tree/gsoc-asyncio and `kiwipy<0.6.0`.  And there is no exception no hang up.
+
+it is more certain that the new version kiwipy may have some incompatible features
+
+#### call_at only receive callback
+
+How to add coroutine to `call_at` (and `call_soon`, `call_later`)?
+
+just by pass the coroutine to `asyncio.create_task` (ensure_future for py<3.7)
+
+```python
+async def coro():
+  await asyncio.sleep(1.)
+
+delay = 5.
+call_at(delay, asyncio.ensure_future, coro())
+```
+
+## 9th-June
+
+#### Tutorial test with new aiida_core
+
+Now the aiida_core is totally migrated to asyncio. Tests beyond unittest is necessary.
+
+--:
+
+- Process status not updated when process finished. (Only CalcJob has this issue)
+- daemon stop hang up. But after timeout, it is stopped.

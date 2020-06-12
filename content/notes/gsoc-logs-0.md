@@ -75,6 +75,7 @@ This project will:
 - Write further developer documentation (mostly the API documentation provided in docstring of useful class and methods) for plumpy and kiwipy.
 - Thoroughly test to make sure asyncio version of `plumpy` and `circus` is working flawlessly with `aiida-core>=1.1`
 - Deliverables include one PR for plumpy and aiida-core each, and two PRs for circus one for removing py2 compatibles and the other (stretch goal) for replacing tornado with asyncio.
+- Write a wiki page in `aiida_core` repository about how `aiida_core` involved with asynchronous programming. This will helpful for developers who will look into the relative part of the code base.
 
 Mentors will help manage interactions with the `circus` maintainers.
 
@@ -110,7 +111,7 @@ the API of plumpy should remain unchanged.
 
 #### 16 June - 28 June (12d): aiida-core migration & tests
 
-- *EDIT*: First, since the kiwipy is updated to asyncio, should change the aiida_core to working with the new kiwi. 
+- *EDIT*: First, since the kiwipy is updated to asyncio, should change the aiida_core to working with the new kiwi.
 - Replace tornado dependencies in aiida-core with asyncio
 - Start from `aiida/manager` and `aiida/engine` replaceing coroutines with `asyncio` and registing task into `asyncio` event loop.
 - Make sure the change not break other part of `aiida-core`
