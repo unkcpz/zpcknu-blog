@@ -17,7 +17,7 @@ But since the starting of using `LoopCommunicator` as communicator, there are mo
 
 Because `asyncio.Future` is used with associated loop, it can not be await in the other loop.
 It is not hard to just fix it if we need the Process initiated with `SavableFuture` created
-by specifing the loop:
+by specifying the loop:
 
 ```python
 @persistence.auto_persist('_pid', '_creation_time', '_future', '_paused', '_status', '_pre_paused_status')
@@ -36,11 +36,12 @@ class Process(StateMachine, persistence.Savable, metaclass=ProcessStateMachineMe
 However, when recreating the `SavableFuture` from saved, the loop is supposed to be
 designated. Otherwise will get the exception 'RuntimeError: Non-thread-safe operation invoked on an event loop other than the current one'
 
-The problem is does loop need to be stored as the persister or just passed as context?
+Does loop need to be stored as the persister or just passed as context of `SavableFuture`?
+If the loop in the `load_context` is desired, how to save and load it explicitly?
 
 #### Issue 2: callback in `call_on_process_finish` can be any callable
 
-Since now, `LoopCommunicator` is used as the communicator, all communications over RabbitMQ
+Since `LoopCommunicator` is used as the communicator now, all communications over RabbitMQ
 will go through `plumpy.create_task`. In `create_task` plumpy expect a coroutine to be
 scheduled in the event loop, but it always not the case, the callback passed to the
 method can be any callable functions coroutines, regular functions, `functools.partial`, lambda,
@@ -58,7 +59,7 @@ def sync_getter():
 
 ```
 
-But not able to convert to a coroutine with deep function calls.
+But not easily to convert to a coroutine with deep function calls.
 For example, `inline_callback` wrap the `callback`, if callback is not a coroutine,
 we need first convert it to the coroutine and await it in the `inline_callback` and then
 convert `inline_callback` into a coroutine either.

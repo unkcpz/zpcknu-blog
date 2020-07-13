@@ -260,3 +260,16 @@ by override the `load_members` method
 Describe the issue:
 
 how to:
+
+## 24th-June
+
+#### how to get the exception from `kiwipy.capture_exceptions`?
+
+```python
+async def run_task():
+    with kiwipy.capture_exceptions(future):
+        assert asyncio.iscoroutine(coro())
+        future.set_result(await coro())
+```
+
+When does exception occurs and how it get captured then displayed?
