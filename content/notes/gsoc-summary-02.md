@@ -35,7 +35,7 @@ You can check the translated documentation [here](https://aiida.readthedocs.io/p
 
 ### `nest_asyncio` not merged
 
-It seems the maintainer of `nest_asyncio` still not address the [pr#28] https://github.com/erdewit/nest_asyncio/pull/28
+It seems the maintainer of `nest_asyncio` still not address the [nest_asyncio #28](https://github.com/erdewit/nest_asyncio/pull/28)
 
 ### return value of `kill_process` method
 
@@ -60,7 +60,7 @@ So the list of futures is chained to a future and returned.
 
 ### When exception raised and captured by `kiwipy` rmq can not be disconnected
 
-State: Resolved by [#71](https://github.com/aiidateam/kiwipy/pull/71)
+State: Resolved by [kiwipy #71](https://github.com/aiidateam/kiwipy/pull/71)
 
 When exception raised and going to be handled by
 `kiwipy.capture_exception` (for example in `plumpy.futures.create_task)` in
