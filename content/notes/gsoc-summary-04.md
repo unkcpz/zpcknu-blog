@@ -1,5 +1,5 @@
 +++
-title="GSoC weeks summary V"
+title="GSoC weeks summary V (event loop policy)"
 date=2020-08-13
 Tags=["GSoC"]
 Category=["Note"]
